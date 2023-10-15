@@ -3,3 +3,4 @@ uvicorn[standard]
 pydantic[email]
 mysql-connector-python
 passlib[bcrypt]
+python-dotenv

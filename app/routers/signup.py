@@ -1,11 +1,13 @@
+from dotenv import load_dotenv
+load_dotenv()
 from fastapi import APIRouter, status, HTTPException
 from mysql.connector import pooling
 from ..schemas import Signup, ShowSignup
 from ..hashing import Hash
+import os
 
 router = APIRouter(prefix="/e-commerce/signup", tags=["SignUp"])
-
-pool = pooling.MySQLConnectionPool(pool_name="Signup_pool", pool_size=3, pool_reset_session=False, host = 'localhost', user ="root",  password = "password")
+pool = pooling.MySQLConnectionPool(pool_name="Signup_pool", pool_size=3, pool_reset_session=False, host = os.getenv("DB_HOST"), user =os.getenv("DB_USER"),  password = os.getenv("DB_PASSWORD"))
 
 @router.post("/create", status_code=status.HTTP_201_CREATED, response_model=ShowSignup)
 async def create_user(signup: Signup):
