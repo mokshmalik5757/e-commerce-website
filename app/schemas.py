@@ -37,3 +37,7 @@ class UpdateSignup(BaseModel):
     FirstName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     LastName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     Email: EmailStr
+
+class Login(BaseModel):
+    UserName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
+    Password: Annotated[str, StringConstraints(min_length=3, max_length=20)]

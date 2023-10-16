@@ -5,8 +5,6 @@ from mysql.connector import pooling
 from ..schemas import Signup, ShowSignup, UpdateSignup
 from ..hashing import Hash
 import mysql.connector
-from mysql.connector.errors import Error
-from mysql.connector import errorcode
 import os
 
 router = APIRouter(prefix="/e-commerce/signup", tags=["SignUp"])
@@ -38,7 +36,7 @@ async def create_user(signup: Signup):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail = str(err))
         
 @router.get("/get/{username}", status_code=status.HTTP_200_OK)
-def get_user(username: str):
+async def get_user(username: str):
         with pool.get_connection() as connection:
             with connection.cursor(buffered=True) as cursor:
                 cursor.execute("USE ecommerce")
@@ -55,7 +53,7 @@ def get_user(username: str):
         return user
 
 @router.put("/change/{username}", status_code=status.HTTP_202_ACCEPTED)
-def alter_user(username: str, signup: UpdateSignup):
+async def alter_user(username: str, signup: UpdateSignup):
     with pool.get_connection() as connection:
         with connection.cursor(buffered=True) as cursor:
             cursor.execute("USE ecommerce")
@@ -75,7 +73,7 @@ def alter_user(username: str, signup: UpdateSignup):
             return updated_user
 
 @router.delete("/delete/{username}", status_code=status.HTTP_200_OK)
-def delete_user(username: str):
+async def delete_user(username: str):
     with pool.get_connection() as connection:
         with connection.cursor(buffered = True) as cursor:
             cursor.execute("USE ecommerce")
