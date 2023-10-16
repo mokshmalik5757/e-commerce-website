@@ -7,6 +7,7 @@ class Signup(BaseModel):
     FirstName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     LastName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     Email: EmailStr
+    UserName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     Password: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     ConfirmPassword: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     
@@ -30,4 +31,9 @@ class ShowSignup(BaseModel):
     FirstName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     LastName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     Email: EmailStr
+    UserName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     
+class UpdateSignup(BaseModel):
+    FirstName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
+    LastName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
+    Email: EmailStr
