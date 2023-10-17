@@ -37,10 +37,6 @@ class UpdateSignup(BaseModel):
     FirstName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     LastName: Annotated[str, StringConstraints(min_length=3, max_length=20)]
     Email: EmailStr
-    
-class Token(BaseModel):
-    access_token: str
-    token_type: str
 
 class TokenData(BaseModel):
     username: str | None = None
