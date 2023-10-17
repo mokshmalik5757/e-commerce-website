@@ -4,3 +4,5 @@ pydantic[email]
 mysql-connector-python
 passlib[bcrypt]
 python-dotenv
+python-jose[cryptography]
+python-multipart

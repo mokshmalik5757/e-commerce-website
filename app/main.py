@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import signup, login
+from app.routers import signup, login
 
 app = FastAPI(debug = True, title = "e-commerce")
 

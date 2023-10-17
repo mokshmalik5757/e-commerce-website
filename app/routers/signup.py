@@ -1,11 +1,12 @@
 from dotenv import load_dotenv
 load_dotenv()
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, status, HTTPException, Depends
 from mysql.connector import pooling
-from ..schemas import Signup, ShowSignup, UpdateSignup
-from ..hashing import Hash
+from app.schemas import Signup, ShowSignup, UpdateSignup
+from app.hashing import Hash
 import mysql.connector
 import os
+from app.oauth2 import get_current_user
 
 router = APIRouter(prefix="/e-commerce/signup", tags=["SignUp"])
 pool = pooling.MySQLConnectionPool(pool_name="Signup_pool", pool_size=3, pool_reset_session=False, host = os.getenv("DB_HOST"), user =os.getenv("DB_USER"),  password = os.getenv("DB_PASSWORD"))
@@ -36,7 +37,7 @@ async def create_user(signup: Signup):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail = str(err))
         
 @router.get("/get/{username}", status_code=status.HTTP_200_OK)
-async def get_user(username: str):
+async def get_user(username: str, current_user =  Depends(get_current_user)):
         with pool.get_connection() as connection:
             with connection.cursor(buffered=True) as cursor:
                 cursor.execute("USE ecommerce")
@@ -53,7 +54,7 @@ async def get_user(username: str):
         return user
 
 @router.put("/change/{username}", status_code=status.HTTP_202_ACCEPTED)
-async def alter_user(username: str, signup: UpdateSignup):
+async def alter_user(username: str, signup: UpdateSignup, current_user =  Depends(get_current_user)):
     with pool.get_connection() as connection:
         with connection.cursor(buffered=True) as cursor:
             cursor.execute("USE ecommerce")
@@ -72,8 +73,8 @@ async def alter_user(username: str, signup: UpdateSignup):
                     }
             return updated_user
 
-@router.delete("/delete/{username}", status_code=status.HTTP_200_OK)
-async def delete_user(username: str):
+@router.delete("/delete/{username}", status_code=status.HTTP_200_OK, )
+async def delete_user(username: str, current_user =  Depends(get_current_user)):
     with pool.get_connection() as connection:
         with connection.cursor(buffered = True) as cursor:
             cursor.execute("USE ecommerce")

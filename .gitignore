@@ -225,3 +225,4 @@ $RECYCLE.BIN/
 .vscode/
 .vscode
 .dockerignore
+test.ipynb
