@@ -6,3 +6,5 @@ passlib[bcrypt]
 python-dotenv
 python-jose[cryptography]
 python-multipart
+fastapi-mail
+jinja2

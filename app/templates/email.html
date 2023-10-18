@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="refresh" content="3; url=http://localhost:8000/docs">
+    <title>Account Activation Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 40px;
+        }
+
+        .container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .logo {
+            background-color: #d43f00;
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        .icon {
+            background-color: #0099ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 80%;
+            margin: 30px auto;
+            padding: 15px;
+            background-color: #0099ff;
+            text-decoration: none;
+            color: white;
+            border-radius: 25px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: gray;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Account Activated</h2>
+    <p>Hello {{ username }},</p>
+    <p>Thank you, your email has been verified. Your account is now active. <br>
+    Please use the link below to login to your account, or after 4 seconds you'll be automatically redirected to the page.</p>
+    <a href="http://localhost:8000/docs" class="btn">LOGIN TO YOUR ACCOUNT</a>
+</div>
+
+</body>
+</html>
