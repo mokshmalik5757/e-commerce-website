@@ -1,4 +1,4 @@
-from pydantic import BaseModel, StringConstraints, EmailStr, field_validator, model_validator
+from pydantic import BaseModel, StringConstraints, EmailStr, field_validator, model_validator, PositiveFloat
 from typing import Annotated, Final
 from pydantic_core import PydanticCustomError
 
@@ -40,3 +40,15 @@ class UpdateSignup(BaseModel):
 
 class TokenData(BaseModel):
     username: str | None = None
+
+class Product(BaseModel):
+    Name: Annotated[str, StringConstraints(min_length=2, max_length=20)]
+    Price: PositiveFloat
+    Description: Annotated[str, StringConstraints(min_length=2, max_length=200)] | None = None
+class ShowProduct(BaseModel):
+    Name: Annotated[str, StringConstraints(min_length=2, max_length=20)]
+    Price: PositiveFloat
+    Description: Annotated[str, StringConstraints(min_length=2, max_length=200)] | None = None
+    username: str|None = None
+class ShowMultipleProducts(BaseModel):
+    products: list[ShowProduct]

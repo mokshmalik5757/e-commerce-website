@@ -107,7 +107,7 @@ async def delete_user(username: str, current_user =  Depends(get_current_user)):
             user = cursor.fetchone()
             
             if user: 
-                cursor.execute("DELETE FROM users where UserName = %s", (username,))
+                cursor.execute("DELETE FROM users WHERE UserName = %s", (username,))
                 connection.commit()
                 return {"message": f"User {user[4]} deleted successfully"}
             
