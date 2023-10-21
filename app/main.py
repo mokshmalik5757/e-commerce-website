@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import signup, login, products
+from app.routers import signup, login, products, images
 
 app = FastAPI(debug = True, title = "e-commerce")
 
@@ -17,6 +17,7 @@ app.add_middleware(
 app.include_router(signup.router)
 app.include_router(login.router)
 app.include_router(products.router)
+app.include_router(images.router)
 
 @app.get("/", tags=["Health Check"], status_code=200)
 def health_check():

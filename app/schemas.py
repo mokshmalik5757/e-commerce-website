@@ -1,6 +1,7 @@
 from pydantic import BaseModel, StringConstraints, EmailStr, field_validator, model_validator, PositiveFloat
 from typing import Annotated, Final
 from pydantic_core import PydanticCustomError
+import json
 
 
 class Signup(BaseModel):
@@ -52,3 +53,13 @@ class ShowProduct(BaseModel):
     username: str|None = None
 class ShowMultipleProducts(BaseModel):
     products: list[ShowProduct]
+
+class Metadatas(BaseModel):
+    metadata: list[str] | None = None
+    
+    @model_validator(mode = "before")
+    @classmethod
+    def validate_to_json(cls, value):
+        if isinstance(value, str):
+            return cls(**json.loads(value))
+        return value
